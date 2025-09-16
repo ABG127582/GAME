@@ -48,14 +48,7 @@ const App = () => {
       volume: 0.75,
   });
 
-  // !!! ATENÇÃO DE SEGURANÇA !!!
-  // A chave de API está sendo exposta no lado do cliente.
-  // Isso é INSEGURO para produção. Em um aplicativo real, as chamadas de API
-  // devem ser feitas a partir de um backend seguro (por exemplo, uma Função do Cloud)
-  // que mantém a chave de API em segredo.
-  // Para fins de desenvolvimento, estamos usando uma variável de ambiente do Vite.
-  // Certifique-se de ter um arquivo `.env.local` com `VITE_GEMINI_API_KEY=SUA_CHAVE_AQUI`.
-  const ai = useMemo(() => new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY }), []);
+  const ai = useMemo(() => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY }), []);
   
   // Service Worker communication
   const postToSW = useCallback((message: object) => {
