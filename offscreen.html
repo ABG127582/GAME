@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offscreen Audio Player</title>
+</head>
+<body>
+  <audio id="audio-player" loop></audio>
+  <script>
+    const audio = document.getElementById('audio-player');
+
+    // Escuta mensagens do Service Worker
+    navigator.serviceWorker.addEventListener('message', event => {
+      const { type, url, volume } = event.data;
+      switch (type) {
+        case 'play':
+          // Se a faixa for diferente, atualiza a fonte
+          if (audio.src !== url) {
+            audio.src = url;
+          }
+          // Define o volume se for fornecido
+          if (volume !== undefined) {
+            audio.volume = volume;
+          }
+          // Toca o áudio
+          audio.play().catch(e => console.error("Audio play failed in offscreen document:", e));
+          break;
+        case 'pause':
+          audio.pause();
+          break;
+        case 'setVolume':
+          if (volume !== undefined) {
+            audio.volume = volume;
+          }
+          break;
+      }
+    });
+
+    // Opcional: Futuramente, pode notificar o Service Worker quando a música terminar
+    audio.addEventListener('ended', () => {
+      // Como o áudio está em loop, este evento não será disparado, 
+      // mas está aqui para futuras implementações (ex: playlists).
+      navigator.serviceWorker.controller?.postMessage({ type: 'PLAYBACK_ENDED' });
+    });
+  </script>
+</body>
+</html>
