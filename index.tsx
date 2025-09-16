@@ -11,15 +11,15 @@ import {
     ShieldIcon, BookOpenIcon, ArrowLeftIcon, ArrowRightIcon, XIcon, MicIcon, BellIcon, BellOffIcon, CalendarIcon,
     FootprintsIcon, StretchingIcon, RepeatIcon, LightbulbIcon, PlayIcon, PauseIcon, Volume2Icon, VolumeXIcon,
     WavesIcon, CloudRainIcon, TreePineIcon, MusicIcon
-} from './icons';
-import { healthAreas } from './data/healthAreas';
-import { generalMotivationalPhrases } from './data/motivationalPhrases';
-import { stretchingExercises } from './data/stretchingExercises';
-import { focusMusicTracks } from './data/focusMusicTracks';
-import DashboardView from './components/views/DashboardView';
-import TasksView from './components/views/TasksView';
-import RewardsView from './components/views/RewardsView';
-import { AlarmsModal, CalendarModal, FeatureSuggestionModal } from './components/shared/Modal';
+} from './src/icons';
+import { healthAreas } from './src/data/healthAreas';
+import { generalMotivationalPhrases } from './src/data/motivationalPhrases';
+import { stretchingExercises } from './src/data/stretchingExercises';
+import { focusMusicTracks } from './src/data/focusMusicTracks';
+import DashboardView from './src/components/views/DashboardView';
+import TasksView from './src/components/views/TasksView';
+import RewardsView from './src/components/views/RewardsView';
+import { AlarmsModal, CalendarModal, FeatureSuggestionModal } from './src/components/shared/Modal';
 
 declare var TimestampTrigger: any;
 
