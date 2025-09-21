@@ -107,6 +107,115 @@ button {
     filter: blur(10px) brightness(0.5);
 }
 
+/* 2.5 STICKY TODAY'S TASKS HEADER */
+.todays-tasks-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(8px);
+    background-color: rgba(28, 25, 23, 0.85); /* --surface with transparency */
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease-in-out;
+}
+
+.todays-tasks-header.expanded {
+    padding: 1rem 1.5rem;
+}
+.todays-tasks-header.collapsed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+}
+.todays-tasks-header.collapsed:hover {
+    background-color: rgba(41, 37, 36, 0.85); /* --border with transparency */
+}
+.todays-tasks-header .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.todays-tasks-header.collapsed .header-content {
+    justify-content: flex-start;
+    gap: 0.75rem;
+}
+.header-title {
+    font-weight: 600;
+}
+.header-summary {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-left: 0.5rem;
+}
+.todays-tasks-header.collapsed .header-summary {
+    background-color: var(--background);
+    padding: 0.1rem 0.5rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+.header-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--border);
+}
+.header-progress-inner {
+    height: 100%;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+.tasks-preview-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: fade-in 0.3s ease;
+}
+.preview-task-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: var(--background);
+}
+.preview-task-item .planner-task-toggle {
+    padding: 0;
+    flex-shrink: 0;
+}
+.preview-task-item .planner-task-toggle .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.preview-task-item .planner-task-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.all-completed-message {
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+.see-all-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
 
 /* 3. GENERAL COMPONENTS */
 .card {
@@ -200,6 +309,11 @@ button {
     width: 1.25rem;
     height: 1.25rem;
     margin-right: 0.5rem;
+}
+.icon-right {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.5rem;
 }
 
 

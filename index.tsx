@@ -40,6 +40,8 @@ const StretchingIcon = ({ className = '', ...props }) => (<svg xmlns="http://www
 const RepeatIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.6A9 9 0 0 1 21 12h-4a5 5 0 0 0-9.43 2.25"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.4A9 9 0 0 1 3 12h4a5 5 0 0 0 9.43-2.25"/></svg>);
 const LightbulbIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>);
 const ClockIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>);
+const ChevronUpIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>);
+const ChevronDownIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>);
 
 // Focus Music Icons
 const PlayIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>);
@@ -91,45 +93,45 @@ const healthAreas = {
 
 const bookInspiredTasks: Record<keyof typeof healthAreas, string[]> = {
     physical: [
-        "Expor-se a 10 minutos de luz solar da manhã.",
-        "Agendar o relaxamento como uma reunião importante.",
+        "Expor-se a 10 minutos de luz solar da manhã logo ao acordar.",
+        "Agendar o relaxamento como uma reunião importante (10 min de respiração ou caminhada).",
         "Fazer uma rotina de exercícios de força 2-3 vezes na semana.",
-        "Verificar os níveis de Vitamina D no próximo check-up.",
+        "Verificar seus níveis de Vitamina D ou tomar sol por 15 minutos com segurança.",
     ],
     mental: [
         "Praticar a 'Pausa de Um Minuto' para observar a respiração.",
-        "Fazer uma caminhada leve de 15 minutos após uma noite mal dormida.",
-        "Identificar uma emoção e perguntar: 'Isto está sob meu controle?'",
-        "Praticar autocompaixão após cometer um erro.",
+        "Fazer uma caminhada leve de 15 minutos, especialmente após uma noite mal dormida.",
+        "Identificar uma emoção difícil e perguntar: 'Minha resposta está sob meu controle?'",
+        "Praticar autocompaixão após cometer um erro, dizendo a si mesmo 'sofrer é parte de ser humano'.",
     ],
     financial: [
-        "Registrar todos os gastos por uma semana, sem julgamento.",
-        "Automatizar a transferência de R$ 50 para a reserva de emergência.",
-        "Ler um artigo sobre um tipo de investimento para iniciantes.",
-        "Revisar o orçamento usando a regra 50-15-35 como guia.",
+        "Registrar todos os seus gastos por uma semana, sem julgamento, apenas observando.",
+        "Automatizar a transferência de um pequeno valor (ex: R$ 50) para sua reserva de emergência.",
+        "Ler um artigo ou assistir a um vídeo sobre um tipo de investimento para iniciantes.",
+        "Revisar seu orçamento usando a regra 50-15-35 como um guia.",
     ],
     family: [
-        "Escolher uma 'linguagem do amor' para praticar intencionalmente hoje.",
-        "Ouvir para entender, não para responder, na próxima conversa difícil.",
-        "Deixar um bilhete ou preparar um café para um familiar.",
-        "Desligar o celular durante uma conversa importante.",
+        "Escolher uma das 5 linguagens do amor (Toque, Elogio, Atenção, Mimos, Obrigações) e praticá-la intencionalmente.",
+        "Na próxima conversa difícil, ouvir para entender, em vez de para responder.",
+        "Surpreender um familiar com um pequeno gesto, como preparar um café ou deixar um bilhete.",
+        "Desligar o celular e dar atenção total durante uma conversa com um ente querido.",
     ],
     professional: [
-        "Refletir sobre as 4 perguntas do Ikigai.",
-        "Dedicar 20 minutos para 'prática deliberada' de uma nova habilidade.",
-        "Fazer uma 'auditoria de energia' dos 7 territórios da vida.",
-        "Criar um ritual de 'desligar' ao final do dia de trabalho.",
+        "Refletir sobre as quatro perguntas do Ikigai: O que você ama? No que você é bom? Do que o mundo precisa? Pelo que você pode ser pago?",
+        "Dedicar 20 minutos para 'prática deliberada' de uma nova habilidade profissional.",
+        "Fazer uma 'auditoria de energia' semanal, revisando os sete territórios da sua vida.",
+        "Criar um ritual de 'desligar' ao final do dia de trabalho, como uma caminhada ou guardar o laptop.",
     ],
     social: [
-        "Enviar uma mensagem significativa para alguém da sua 'Tribo Íntima'.",
-        "Compartilhar algo um pouco mais pessoal com um amigo de confiança.",
-        "Juntar-se a um curso ou grupo sobre algo que você ama.",
-        "Fazer um elogio sincero ou uma pergunta sobre um interesse em comum a alguém novo.",
+        "Enviar uma mensagem significativa para alguém da sua 'Tribo Íntima' (3 a 5 pessoas mais próximas).",
+        "Compartilhar algo um pouco mais pessoal (um desafio ou sentimento real) com um amigo de confiança.",
+        "Juntar-se a um curso, clube do livro ou grupo de corrida sobre algo que você ama.",
+        "Fazer uma 'primeira micro-interação': um elogio sincero ou uma pergunta sobre um interesse em comum a alguém novo.",
     ],
     spiritual: [
-        "Reservar 5 minutos para meditação e foco na respiração.",
-        "Anotar uma coisa pela qual você foi genuinamente grato hoje.",
-        "Fazer uma caminhada em um lugar de grande beleza natural.",
+        "Reservar 5 minutos para meditação, focando apenas na sua respiração.",
+        "Antes de dormir, anotar uma coisa pela qual você foi genuinamente grato hoje.",
+        "Buscar admiração ('awe'): caminhar na natureza, olhar para as estrelas ou ouvir uma música emocionante.",
         "Envolver-se em um pequeno ato de serviço para sua comunidade.",
     ],
 };
@@ -406,6 +408,11 @@ const App: React.FC = () => {
         >
             {({ isLoading: isAILoading, error: aiError, generateWeeklyGoals, generatePendingFeatures, handleVoiceCommand }: any) => (
                 <main className="app-container">
+                    <TodaysTasksHeader
+                        tasks={tasks}
+                        onToggleTask={toggleTask}
+                        onViewChange={handleViewChange}
+                    />
                     <div className={`view-wrapper ${activeModal ? 'blurred' : ''}`}>
                          {renderView()}
                     </div>
@@ -1167,8 +1174,9 @@ const FocusMusicTab = () => {
         }
     };
     
-    // FIX: `currentTrackIndex` can be `unknown` which cannot be used as an index.
-    // Using `typeof` check to safely narrow the type to `number`.
+    // FIX: `currentTrackIndex` can be of type `unknown` and cannot be used directly as an array index.
+    // A `typeof` check is used to safely narrow the type to `number` before accessing the array.
+    // The previous explicit cast `as number` was redundant and has been removed to resolve the type error.
     const currentTrack = typeof currentTrackIndex === 'number' ? focusMusicTracks[currentTrackIndex] : null;
 
     return (
@@ -1441,6 +1449,97 @@ const PlannerTaskItem = ({ task, onToggle, onShowModal }) => {
                     {task.completed ? <CheckCircle2Icon className="icon icon-check" /> : <CircleIcon className="icon" />}
                 </button>
                 <span className="planner-task-text">{task.text}</span>
+            </div>
+        </div>
+    );
+};
+
+const TodaysTasksHeader = ({ tasks, onToggleTask, onViewChange }) => {
+    const [isExpanded, setIsExpanded] = useLocalStorage('todaysTasksExpanded', true);
+
+    const todaysTasks = useMemo(() => {
+        const todayStr = new Date().toISOString().split('T')[0];
+        return tasks.filter(task => task.dueDate === todayStr);
+    }, [tasks]);
+
+    if (todaysTasks.length === 0) {
+        return null;
+    }
+
+    const completedTasks = todaysTasks.filter(t => t.completed);
+    const incompleteTasks = todaysTasks.filter(t => !t.completed);
+    const allCompleted = incompleteTasks.length === 0;
+    const progress = todaysTasks.length > 0 ? (completedTasks.length / todaysTasks.length) * 100 : 0;
+
+    const toggleExpansion = (e) => {
+        if (e.target.closest('button')) {
+            e.stopPropagation();
+        }
+        setIsExpanded(prev => !prev);
+    };
+    
+    const handleGoToPlanner = () => {
+        onViewChange('planner');
+    }
+
+    if (!isExpanded) {
+        return (
+            <div className="todays-tasks-header collapsed" onClick={toggleExpansion} role="button" tabIndex={0} onKeyPress={(e) => (e.key === 'Enter' || e.key === ' ') && toggleExpansion(e)}>
+                <div className="header-content">
+                    <CalendarIcon className="icon" />
+                    <span className="header-title">Tarefas de Hoje</span>
+                    <span className="header-summary">{completedTasks.length}/{todaysTasks.length}</span>
+                </div>
+                 <div className="header-progress-bar">
+                    <div className="header-progress-inner" style={{ width: `${progress}%` }}></div>
+                </div>
+                <button className="btn icon-btn btn-ghost" aria-label="Expandir tarefas de hoje" onClick={(e) => { e.stopPropagation(); setIsExpanded(true); }}>
+                    <ChevronDownIcon />
+                </button>
+            </div>
+        );
+    }
+    
+    return (
+        <div className="todays-tasks-header expanded">
+            <div className="header-content">
+                <div className="flex items-center gap-2">
+                    <CalendarIcon className="icon" />
+                    <span className="header-title">Tarefas de Hoje</span>
+                    <span className="header-summary">({completedTasks.length}/{todaysTasks.length} concluídas)</span>
+                </div>
+                <button onClick={() => setIsExpanded(false)} className="btn icon-btn btn-ghost" aria-label="Recolher tarefas de hoje">
+                    <ChevronUpIcon />
+                </button>
+            </div>
+            <div className="tasks-preview-list">
+                {allCompleted ? (
+                    <div className="all-completed-message">
+                        <TrophyIcon className="icon" />
+                        <p>Parabéns! Você concluiu todas as suas tarefas de hoje.</p>
+                    </div>
+                ) : (
+                    <>
+                        {incompleteTasks.slice(0, 3).map(task => (
+                            <div key={task.id} className="preview-task-item">
+                                <button 
+                                    className="planner-task-toggle"
+                                    onClick={() => onToggleTask(task.id, true)}
+                                    aria-label={`Marcar ${task.text} como concluída`}
+                                >
+                                    <CircleIcon className="icon" />
+                                </button>
+                                <span className="planner-task-text">{task.text}</span>
+                            </div>
+                        ))}
+                        {incompleteTasks.length > 3 && (
+                            <button className="btn btn-ghost see-all-btn" onClick={handleGoToPlanner}>
+                                Ver mais {incompleteTasks.length - 3} tarefas
+                                <ArrowRightIcon className="icon-right" />
+                            </button>
+                        )}
+                    </>
+                )}
             </div>
         </div>
     );
@@ -1724,15 +1823,21 @@ const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, 
                 responseSchema: schema,
             } : {};
 
-            const response = await ai.models.generateContent({
+            const response: GenerateContentResponse = await ai.models.generateContent({
                 model: 'gemini-2.5-flash',
                 contents: prompt,
                 config: config,
             });
             
             const text = response.text;
+
             if (schema) {
-                return JSON.parse(text);
+                // Ensure text is not empty before parsing, and trim whitespace.
+                const trimmedText = text.trim();
+                if (trimmedText) {
+                    return JSON.parse(trimmedText);
+                }
+                return null;
             }
             return text;
 
