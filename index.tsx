@@ -1,3 +1,5 @@
+
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -1132,7 +1134,14 @@ const useServiceWorker = () => {
                     // This was causing a downstream error where `currentTrackIndex` was treated as `unknown`
                     // and could not be used as an array index (which must be a number).
                     // Casting the payload to the correct `PlayerState` type ensures type safety.
-                    setPlayerState(event.data.payload as PlayerState);
+                    const payload = event.data.payload;
+                    if (payload) {
+                        setPlayerState({
+                            isPlaying: payload.isPlaying,
+                            currentTrackIndex: payload.currentTrackIndex,
+                            volume: payload.volume,
+                        });
+                    }
                 }
             };
             navigator.serviceWorker.addEventListener('message', handleMessage);
@@ -1665,6 +1674,11 @@ const VoiceCommandModal: React.FC<{ onCommand: (command: string) => void; onClos
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
     const recognitionRef = useRef<any>(null);
+    const transcriptRef = useRef('');
+
+    useEffect(() => {
+        transcriptRef.current = transcript;
+    }, [transcript]);
 
     useEffect(() => {
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -1686,18 +1700,25 @@ const VoiceCommandModal: React.FC<{ onCommand: (command: string) => void; onClos
 
         recognition.onend = () => {
             setIsListening(false);
-            if (transcript.trim()) {
-                onCommand(transcript.trim());
+            if (transcriptRef.current.trim()) {
+                onCommand(transcriptRef.current.trim());
             }
         };
         recognitionRef.current = recognition;
-    }, [onCommand, transcript]);
+
+        return () => {
+            if (recognitionRef.current) {
+                recognitionRef.current.stop();
+            }
+        };
+    }, [onCommand]);
 
     const handleListen = () => {
         if (isListening) {
             recognitionRef.current.stop();
         } else {
             setTranscript('');
+            transcriptRef.current = '';
             recognitionRef.current.start();
             setIsListening(true);
         }
@@ -1835,7 +1856,13 @@ const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, 
                 // Ensure text is not empty before parsing, and trim whitespace.
                 const trimmedText = text.trim();
                 if (trimmedText) {
-                    return JSON.parse(trimmedText);
+                    try {
+                        return JSON.parse(trimmedText);
+                    } catch(parseError) {
+                        console.error("Failed to parse Gemini JSON response:", parseError, "Raw text:", trimmedText);
+                        setError("A resposta da IA não estava em um formato válido.");
+                        return null;
+                    }
                 }
                 return null;
             }
