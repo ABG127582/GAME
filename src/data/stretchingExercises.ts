@@ -1,8 +1,0 @@
-export const stretchingExercises = [
-    { name: 'Alongamento de Quadríceps em Pé', description: 'Em pé, equilibre-se em uma perna e puxe o outro pé em direção ao glúteo, sentindo o alongamento na frente da coxa. Mantenha por 30s.', imgPlaceholder: 'Ilustração de uma pessoa em pé puxando o calcanhar para o glúteo.', duration: 30 },
-    { name: 'Alongamento de Isquiotibiais Sentado', description: 'Sente-se com uma perna estendida e a outra dobrada. Incline-se para a frente sobre a perna estendida. Mantenha por 30s.', imgPlaceholder: 'Ilustração de uma pessoa sentada no chão, inclinando-se sobre a perna estendida.', duration: 30 },
-    { name: 'Alongamento Borboleta', description: 'Sente-se, junte as solas dos pés e puxe os calcanhares para perto do corpo. Pressione suavemente os joelhos para baixo. Mantenha por 30s.', imgPlaceholder: 'Ilustração de uma pessoa sentada com as solas dos pés juntas.', duration: 30 },
-    { name: 'Alongamento de Tríceps', description: 'Leve um braço por cima da cabeça, dobre o cotovelo e puxe-o suavemente com a outra mão para alongar o tríceps. Mantenha por 30s por lado.', imgPlaceholder: 'Ilustração de uma pessoa puxando o cotovelo atrás da cabeça.', duration: 30 },
-    { name: 'Alongamento Gato-Vaca', description: 'Em quatro apoios, arqueie as costas para cima (gato) e depois para baixo (vaca), alternando os movimentos lentamente.', imgPlaceholder: 'Ilustração da postura do Gato e da Vaca na ioga.', duration: 60 },
-    { name: 'Postura da Criança', description: 'Ajoelhe-se e sente-se sobre os calcanhares. Incline-se para a frente, estendendo os braços à sua frente ou ao lado do corpo. Mantenha por 60s.', imgPlaceholder: 'Ilustração da Postura da Criança na ioga.', duration: 60 }
-];

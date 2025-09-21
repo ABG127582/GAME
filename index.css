@@ -1,3 +1,5 @@
+
+
 /* === PEQUENOS PASSOS - VIBRANT DARK THEME === */
 
 /* 1. VARIABLES & BASE STYLES */
@@ -80,6 +82,7 @@ button {
 /* 2. LAYOUT & CONTAINERS */
 .app-container {
   min-height: 100vh;
+  padding-bottom: 70px; /* Space for the nav bar */
 }
 .view-container {
   max-width: 80rem;
@@ -187,6 +190,11 @@ button {
 .btn-sm {
     padding: 0.4rem 1rem;
     font-size: 0.875rem;
+}
+.btn-lg {
+    padding: 1rem;
+    width: 64px;
+    height: 64px;
 }
 .icon-left {
     width: 1.25rem;
@@ -651,6 +659,8 @@ input[type="time"].input {
   align-items: center;
   gap: 0.25rem;
   flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 .due-date-display {
   display: inline-flex;
@@ -717,6 +727,36 @@ input[type="time"].input {
   padding: 0.5rem;
   max-width: 110px;
 }
+.task-timeout-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.timeout-input {
+  width: 80px;
+  padding: 0.5rem;
+  text-align: center;
+}
+.timeout-input::placeholder {
+  font-size: 0.8em;
+}
+.timer-display-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-orange);
+  background-color: var(--background);
+  padding: 0.3rem 0.6rem;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+}
+.timer-display-badge .icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 
 .card-header-with-nav {
     display: flex;
@@ -763,6 +803,48 @@ input[type="time"].input {
     background-color: var(--background);
     cursor: default;
     opacity: 0.7;
+}
+
+/* 5.0 TASK INSPIRATION */
+.task-inspiration {
+    margin-bottom: 2rem;
+}
+.inspiration-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+.inspiration-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem; /* for scrollbar spacing */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.inspiration-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+.inspiration-card {
+    flex: 0 0 250px;
+    padding: 1rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    line-height: 1.5;
+}
+.inspiration-card:hover {
+    border-color: var(--primary);
+    color: var(--foreground);
+    transform: translateY(-3px);
 }
 
 /* 5.1 RUNNING TAB */
@@ -1270,6 +1352,23 @@ input[type="time"].input {
   overflow-y: auto;
   flex-grow: 1;
 }
+.voice-modal-body {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.voice-modal-content-centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+.voice-modal-content-centered p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
 .alarm-list {
   list-style: none;
   padding: 0;
@@ -1340,6 +1439,11 @@ input[type="time"].input {
 }
 .calendar-modal-day.is-today {
     border-color: var(--primary);
+}
+.calendar-modal-day.selected {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary-light);
 }
 .calendar-modal-day.has-medal {
     color: var(--primary-foreground);
@@ -1475,6 +1579,193 @@ input[type="time"].input {
   animation: checkmark-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Action button styles */
+.action-button-container {
+    position: fixed;
+    bottom: 6rem; /* Adjusted for nav bar */
+    right: 2rem;
+    z-index: 40;
+}
+.main-action-btn {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.main-action-btn:hover {
+    transform: scale(1.1);
+}
+.main-action-btn.open {
+    transform: rotate(45deg);
+    background-color: var(--accent-red-500);
+}
+.main-action-btn .icon {
+    width: 2rem;
+    height: 2rem;
+}
+.action-options {
+    position: absolute;
+    bottom: 5rem;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+}
+.action-option-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface);
+    color: var(--foreground);
+    border-radius: 99px;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slide-in-up 0.3s ease forwards;
+}
+.action-option-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--border);
+}
+.action-option-btn .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.action-option-label {
+    margin: 0 0.75rem;
+    font-weight: 600;
+}
+
+/* 10. PLANNER VIEW */
+.planner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.planner-month-year {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.planner-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.25rem;
+}
+.planner-nav .today-btn {
+    padding: 0 1rem;
+}
+.planner-nav .today-btn.disabled {
+    color: var(--primary);
+}
+.planner-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.75rem;
+    min-height: 60vh;
+}
+.planner-day-column {
+    background-color: var(--background);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.planner-day-column.is-today .planner-day-header .planner-day-date {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+.planner-day-header {
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    text-transform: capitalize;
+}
+.planner-day-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+.planner-day-date {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 700;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 50%;
+    margin: 0.25rem auto 0;
+    transition: all 0.2s ease;
+}
+.planner-tasks-list {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1;
+}
+.planner-no-tasks {
+    flex-grow: 1;
+}
+.planner-task-item {
+    background-color: var(--surface);
+    border-radius: 0.375rem;
+    border-left: 3px solid var(--area-color);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.planner-task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background-color: var(--border);
+}
+.planner-task-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.planner-task-toggle {
+    padding: 0;
+    flex-shrink: 0;
+}
+.planner-task-toggle .icon {
+    width: 1rem;
+    height: 1rem;
+}
+.planner-task-toggle .icon-check {
+    color: var(--primary);
+}
+.planner-task-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.planner-task-item.completed {
+    opacity: 0.6;
+    background-color: transparent;
+}
+.planner-task-item.completed .planner-task-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+
 /* Responsive grids */
 @media (min-width: 768px) {
   .md-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
@@ -1483,4 +1774,68 @@ input[type="time"].input {
 }
 @media (min-width: 1024px) {
   .lg-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* 11. BOTTOM NAVIGATION BAR */
+.bottom-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch; /* Make items take full height */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    z-index: 30;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    padding: 0.5rem 0;
+    border-radius: 0;
+}
+
+.nav-item .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 0.25rem;
+    transition: transform 0.2s ease;
+}
+
+.nav-label {
+    font-size: 0.625rem; /* A bit smaller for mobile */
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.nav-item:hover {
+    color: var(--foreground);
+    background-color: var(--border);
+}
+
+.nav-item.active {
+    color: var(--primary);
+}
+
+.nav-item.active .icon {
+    transform: scale(1.1);
+}
+
+.nav-item.active .nav-label {
+    font-weight: 700;
+}
+
+.nav-item:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: -4px;
 }
