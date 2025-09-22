@@ -402,11 +402,32 @@ input[type="time"].input {
   background-image: radial-gradient(var(--border) 1px, transparent 1px);
   background-size: 1.5rem 1.5rem;
 }
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
 .dashboard-hero h1 {
   font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -0.05em;
-  margin-bottom: 0.25rem;
+  text-align: left;
+}
+.profile-avatar-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--border);
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.profile-avatar-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 .dashboard-hero p {
   font-size: 1.125rem;
@@ -515,9 +536,6 @@ input[type="time"].input {
     margin: 0 auto;
     line-height: 1.7;
 }
-.no-goals-card .btn {
-    margin-top: 1rem;
-}
 
 .pending-features-grid {
     display: grid;
@@ -568,9 +586,6 @@ input[type="time"].input {
     max-width: 450px;
     margin: 0 auto;
     line-height: 1.7;
-}
-.no-features-card .btn {
-    margin-top: 1rem;
 }
 
 .areas-grid {
@@ -1472,6 +1487,23 @@ input[type="time"].input {
   overflow-y: auto;
   flex-grow: 1;
 }
+.voice-modal-body {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.voice-modal-content-centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+.voice-modal-content-centered p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
 .alarm-list {
   list-style: none;
   padding: 0;
@@ -1609,6 +1641,12 @@ input[type="time"].input {
 @keyframes pulse {
   50% { opacity: .5; }
 }
+.btn.recording {
+    background-color: var(--warning-background);
+    color: var(--warning-text);
+    border-color: var(--warning-border);
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 
 @keyframes checkmark-pop {
   0% {
@@ -1674,6 +1712,70 @@ input[type="time"].input {
 
 .task-item.completed .icon-check {
   animation: checkmark-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Action button styles */
+.action-button-container {
+    position: fixed;
+    bottom: 6rem; /* Adjusted for nav bar */
+    right: 2rem;
+    z-index: 40;
+}
+.main-action-btn {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.main-action-btn:hover {
+    transform: scale(1.1);
+}
+.main-action-btn.open {
+    transform: rotate(45deg);
+    background-color: var(--accent-red-500);
+}
+.main-action-btn .icon {
+    width: 2rem;
+    height: 2rem;
+}
+.action-options {
+    position: absolute;
+    bottom: 5rem;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+}
+.action-option-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface);
+    color: var(--foreground);
+    border-radius: 99px;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slide-in-up 0.3s ease forwards;
+}
+.action-option-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--border);
+}
+.action-option-btn .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.action-option-label {
+    margin: 0 0.75rem;
+    font-weight: 600;
 }
 
 /* 10. PLANNER VIEW */
@@ -1871,4 +1973,145 @@ input[type="time"].input {
 .nav-item:focus-visible {
     outline: 2px solid var(--primary-light);
     outline-offset: -4px;
+}
+
+/* 12. NEW VIEWS (LOGIN, CHALLENGES, PROFILE) */
+.login-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+}
+.login-card {
+    width: 100%;
+    max-width: 450px;
+}
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 0.75rem;
+}
+.avatar-selector {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    font-size: 2rem;
+    background-color: var(--border);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+.avatar-selector:hover {
+    transform: scale(1.1);
+}
+.avatar-selector.selected {
+    border-color: var(--primary);
+    background-color: var(--surface);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+.leaderboard-card {
+    border-left: 4px solid var(--accent-indigo-500);
+}
+.leaderboard-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--border);
+    border-radius: 0.5rem;
+}
+.leaderboard-item.is-user {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 700;
+}
+.leaderboard-rank {
+    width: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+.leaderboard-item.is-user .leaderboard-rank {
+    color: var(--primary-foreground);
+}
+.leaderboard-rank .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.leaderboard-player {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-grow: 1;
+}
+.player-avatar {
+    font-size: 1.25rem;
+}
+.leaderboard-score {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.profile-avatar-large {
+    width: 8rem;
+    height: 8rem;
+    font-size: 4rem;
+    border-radius: 50%;
+    background-color: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 4px solid var(--surface);
+    box-shadow: 0 0 0 4px var(--border);
+}
+.profile-name-input {
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    background-color: transparent;
+    border-color: var(--primary);
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto 0;
+}
+.profile-actions .btn {
+    width: 100%;
+}
+.profile-actions .btn-red {
+    background-color: var(--warning-background);
+    color: var(--warning-text);
+    border: 1px solid var(--warning-border);
+}
+.profile-actions .btn-red:hover {
+    background-color: color-mix(in srgb, var(--warning-background) 80%, white);
 }

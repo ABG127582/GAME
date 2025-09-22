@@ -1,5 +1,3 @@
-
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -11,7 +9,7 @@ import { GoogleGenAI, GenerateContentResponse, Type } from "@google/genai";
 declare var TimestampTrigger: any;
 
 // --- Icon Components (replaces lucide-react) ---
-const TrophyIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>);
+const TrophyIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>);
 const TargetIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
 const CheckCircle2Icon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>);
 const CircleIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>);
@@ -44,6 +42,8 @@ const LightbulbIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.
 const ClockIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>);
 const ChevronUpIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>);
 const ChevronDownIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>);
+const UserIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>);
+const LogOutIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>);
 
 // Focus Music Icons
 const PlayIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>);
@@ -60,7 +60,7 @@ const BottomNavBar = ({ activeView, onViewChange }) => {
     const navItems = [
         { id: 'dashboard', label: 'Início', icon: FootprintsIcon },
         { id: 'planner', label: 'Plano', icon: CalendarDaysIcon },
-        { id: 'progress', label: 'Progresso', icon: TrendingUpIcon },
+        { id: 'challenges', label: 'Desafios', icon: UsersIcon },
         { id: 'rewards', label: 'Prêmios', icon: AwardIcon },
     ];
 
@@ -163,6 +163,16 @@ const stretchingExercises = [
     { id: 6, name: 'Torção de Coluna Deitado', description: 'Deitado de costas, traga um joelho em direção ao peito e, em seguida, cruze-o sobre o corpo.', duration: 90 },
 ];
 
+const avatars = ['😊', '😎', '🚀', '🧠', '💪', '🌱', '🏆', '🧘', '🦊', '🦉', '🌟', '💡'];
+
+
+// --- DATA TYPES ---
+type User = {
+    id: string;
+    name: string;
+    avatar: string;
+};
+
 type Task = {
   id: string;
   text: string;
@@ -201,14 +211,34 @@ type PlayerState = {
     volume: number;
 };
 
+type ChallengeFriend = {
+    id: string;
+    name: string;
+    avatar: string;
+    score: number;
+    lastUpdated: string;
+};
+
+type Challenge = {
+    id: string;
+    name: string;
+    endDate: string;
+    friends: ChallengeFriend[];
+};
+
+
 const App: React.FC = () => {
     // State management
-    const [tasks, setTasks] = useLocalStorage<Task[]>('tasks', []);
-    const [view, setView] = useLocalStorage<'dashboard' | 'tasks' | 'rewards' | 'progress' | 'planner'>('view', 'dashboard');
-    const [currentArea, setCurrentArea] = useLocalStorage<keyof typeof healthAreas | null>('currentArea', null);
-    const [weeklyGoals, setWeeklyGoals] = useLocalStorage<WeeklyGoal[]>('weeklyGoals', []);
-    const [pendingFeatures, setPendingFeatures] = useLocalStorage<PendingFeature[]>('pendingFeatures', []);
-    const [runLogs, setRunLogs] = useLocalStorage<RunLog[]>('runLogs', []);
+    const [user, setUser] = useUserLocalStorage<User | null>('userProfile', null);
+    const userId = user?.id || null;
+
+    const [tasks, setTasks] = useUserLocalStorage<Task[]>('tasks', [], userId);
+    const [view, setView] = useUserLocalStorage<'dashboard' | 'tasks' | 'rewards' | 'progress' | 'planner' | 'challenges' | 'profile'>('view', 'dashboard', userId);
+    const [currentArea, setCurrentArea] = useUserLocalStorage<keyof typeof healthAreas | null>('currentArea', null, userId);
+    const [weeklyGoals, setWeeklyGoals] = useUserLocalStorage<WeeklyGoal[]>('weeklyGoals', [], userId);
+    const [pendingFeatures, setPendingFeatures] = useUserLocalStorage<PendingFeature[]>('pendingFeatures', [], userId);
+    const [runLogs, setRunLogs] = useUserLocalStorage<RunLog[]>('runLogs', [], userId);
+    const [challenges, setChallenges] = useUserLocalStorage<Challenge[]>('challenges', [], userId);
     const [activeModal, setActiveModal] = useState<string | null>(null);
     const [modalData, setModalData] = useState<any>(null);
 
@@ -236,6 +266,17 @@ const App: React.FC = () => {
         setView(newView);
         setCurrentArea(areaId);
     };
+
+    const handleLogin = (newUser: User) => {
+        setUser(newUser);
+        setView('dashboard');
+    };
+
+    const handleLogout = () => {
+        // We can clear all user-specific data here if we want, but for now, just logging out is fine.
+        setUser(null);
+    };
+
 
     // Task handlers
     const addTask = (newTask: Partial<Task>) => {
@@ -301,6 +342,26 @@ const App: React.FC = () => {
     const handleNewFeatures = (newFeatures: PendingFeature[]) => {
         setPendingFeatures(newFeatures);
     };
+    
+    // Challenge Handlers
+    const handleAddChallenge = (newChallenge: Omit<Challenge, 'id'>) => {
+        const fullChallenge: Challenge = { ...newChallenge, id: crypto.randomUUID() };
+        setChallenges([fullChallenge, ...challenges]);
+    };
+
+    // Voice Command Handlers
+    const handleVoiceAddTask = (taskData: { text: string; areaId: keyof typeof healthAreas; dueDate: string }) => {
+        addTask(taskData);
+        setActiveModal(null);
+    };
+
+    const handleVoiceCompleteTask = (taskText: string) => {
+        const taskToComplete = tasks.find(t => t.text.toLowerCase().includes(taskText.toLowerCase()) && !t.completed);
+        if (taskToComplete) {
+            toggleTask(taskToComplete.id, true);
+        }
+        setActiveModal(null);
+    };
 
     // Notifications
     useEffect(() => {
@@ -347,84 +408,107 @@ const App: React.FC = () => {
         setActiveModal(null);
     };
 
+    if (!user) {
+        return <LoginView onLogin={handleLogin} />;
+    }
+
+    const renderView = () => {
+        switch (view) {
+            case 'tasks':
+                return <TasksView
+                    tasks={tasks}
+                    currentArea={currentArea}
+                    onAddTask={addTask}
+                    onToggleTask={toggleTask}
+                    onEditTask={editTask}
+                    onDeleteTask={deleteTask}
+                    onUpdateTaskSettings={updateTaskSettings}
+                    onBack={() => handleViewChange('dashboard')}
+                    onShowModal={showModal}
+                    runLogs={runLogs}
+                    onAddRunLog={addRunLog}
+                    />;
+            case 'rewards':
+                return <RewardsView tasks={tasks} />;
+            case 'progress':
+                return <ProgressView tasks={tasks} />;
+            case 'planner':
+                return <PlannerView
+                    tasks={tasks}
+                    onToggleTask={toggleTask}
+                    onShowModal={showModal}
+                    />;
+            case 'challenges':
+                return <ChallengesView
+                    challenges={challenges}
+                    tasks={tasks}
+                    user={user}
+                    onAddChallenge={handleAddChallenge}
+                    setChallenges={setChallenges}
+                    onShowModal={showModal}
+                />;
+             case 'profile':
+                return <ProfileView user={user} onLogout={handleLogout} onUpdateUser={setUser} />;
+            case 'dashboard':
+            default:
+                return <Dashboard
+                    user={user}
+                    stats={stats}
+                    onViewChange={handleViewChange}
+                    weeklyGoals={weeklyGoals}
+                    pendingFeatures={pendingFeatures}
+                    onShowModal={showModal}
+                    />;
+        }
+    };
 
     return (
         <GeminiWrapper
             tasks={tasks}
             onNewGoals={handleNewGoals}
             onNewFeatures={handleNewFeatures}
+            onAddTask={handleVoiceAddTask}
+            onCompleteTask={handleVoiceCompleteTask}
         >
-            {({ isLoading: isAILoading, error: aiError, generateWeeklyGoals, generatePendingFeatures }: any) => {
-                const renderView = () => {
-                    switch (view) {
-                        case 'tasks':
-                            return <TasksView
-                                tasks={tasks}
-                                currentArea={currentArea}
-                                onAddTask={addTask}
-                                onToggleTask={toggleTask}
-                                onEditTask={editTask}
-                                onDeleteTask={deleteTask}
-                                onUpdateTaskSettings={updateTaskSettings}
-                                onBack={() => handleViewChange('dashboard')}
-                                onShowModal={showModal}
-                                runLogs={runLogs}
-                                onAddRunLog={addRunLog}
-                                />;
-                        case 'rewards':
-                            return <RewardsView tasks={tasks} />;
-                        case 'progress':
-                            return <ProgressView tasks={tasks} />;
-                        case 'planner':
-                            return <PlannerView
-                                tasks={tasks}
-                                onToggleTask={toggleTask}
-                                onShowModal={showModal}
-                                />;
-                        case 'dashboard':
-                        default:
-                            return <Dashboard
-                                stats={stats}
-                                onViewChange={handleViewChange}
-                                weeklyGoals={weeklyGoals}
-                                pendingFeatures={pendingFeatures}
-                                onShowModal={showModal}
-                                onGenerateGoals={generateWeeklyGoals}
-                                onGenerateFeatures={generatePendingFeatures}
-                                isLoading={isAILoading}
-                                />;
-                    }
-                };
-                
-                return (
-                    <main className="app-container">
-                        <TodaysTasksHeader
-                            tasks={tasks}
-                            onToggleTask={toggleTask}
-                            onViewChange={handleViewChange}
-                        />
-                        <div className={`view-wrapper ${activeModal ? 'blurred' : ''}`}>
-                             {renderView()}
-                        </div>
-                         <BottomNavBar activeView={view} onViewChange={handleViewChange} />
-                         <Modal
-                            isOpen={!!activeModal}
-                            onClose={closeModal}
-                            title={
-                              activeModal === 'alarms' ? 'Alarmes Agendados' :
-                              activeModal === 'recurrence' ? 'Editar Tarefa' :
-                              activeModal === 'datepicker' ? 'Selecione a Data' :
-                              'Modal'
-                            }
-                          >
-                            {activeModal === 'alarms' && <AlarmListModal tasks={tasks} onClose={closeModal} />}
-                            {activeModal === 'recurrence' && <RecurrenceModal task={modalData} onSave={(settings) => { updateTaskSettings(modalData.id, settings); closeModal(); }} onClose={closeModal} />}
-                            {activeModal === 'datepicker' && <DatePickerModal currentDate={modalData.currentDate} onDateSelect={(date) => { modalData.onDateSelect(date); closeModal(); }} onClose={closeModal} />}
-
-                          </Modal>
-                    </main>
-                );
-            }}
+            {({ isLoading: isAILoading, error: aiError, generateWeeklyGoals, generatePendingFeatures, handleVoiceCommand }: any) => (
+                <main className="app-container">
+                    <TodaysTasksHeader
+                        tasks={tasks}
+                        onToggleTask={toggleTask}
+                        onViewChange={handleViewChange}
+                    />
+                    <div className={`view-wrapper ${activeModal ? 'blurred' : ''}`}>
+                         {renderView()}
+                    </div>
+                     <BottomNavBar activeView={view} onViewChange={handleViewChange} />
+                     <Modal
+                        isOpen={!!activeModal}
+                        onClose={closeModal}
+                        title={
+                          activeModal === 'alarms' ? 'Alarmes Agendados' :
+                          activeModal === 'recurrence' ? 'Editar Tarefa' :
+                          activeModal === 'voice' ? 'Comando de Voz' :
+                          activeModal === 'datepicker' ? 'Selecione a Data' :
+                          activeModal === 'addChallenge' ? 'Criar Novo Desafio' :
+                          'Modal'
+                        }
+                      >
+                        {activeModal === 'alarms' && <AlarmListModal tasks={tasks} onClose={closeModal} />}
+                        {activeModal === 'recurrence' && <RecurrenceModal task={modalData} onSave={(settings) => { updateTaskSettings(modalData.id, settings); closeModal(); }} onClose={closeModal} />}
+                        {activeModal === 'voice' && <VoiceCommandModal onCommand={handleVoiceCommand} onClose={closeModal} isProcessing={isAILoading} error={aiError} />}
+                        {activeModal === 'datepicker' && <DatePickerModal currentDate={modalData.currentDate} onDateSelect={(date) => { modalData.onDateSelect(date); closeModal(); }} onClose={closeModal} />}
+                        {activeModal === 'addChallenge' && <CreateChallengeModal onSave={handleAddChallenge} onClose={closeModal} />}
+                      </Modal>
+                      <ActionButton
+                          onGenerateGoals={generateWeeklyGoals}
+                          onGenerateFeatures={generatePendingFeatures}
+                          onShowVoiceModal={() => showModal('voice')}
+                          isLoading={isAILoading}
+                          hasGoals={weeklyGoals.length > 0}
+                          hasFeatures={pendingFeatures.length > 0}
+                      />
+                </main>
+            )}
         </GeminiWrapper>
     );
 };
@@ -432,11 +516,79 @@ const App: React.FC = () => {
 
 // --- VIEWS ---
 
-const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowModal, onGenerateGoals, onGenerateFeatures, isLoading }) => (
+const LoginView = ({ onLogin }: { onLogin: (user: User) => void }) => {
+    const [name, setName] = useState('');
+    const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (name.trim()) {
+            onLogin({
+                id: crypto.randomUUID(),
+                name: name.trim(),
+                avatar: selectedAvatar,
+            });
+        }
+    };
+
+    return (
+        <div className="login-view">
+            <div className="login-card card">
+                <div className="card-content">
+                    <header className="text-center mb-6">
+                        <h1 className="text-3xl font-bold">Bem-vindo(a) aos</h1>
+                        <h2 className="text-4xl font-black text-primary">Pequenos Passos</h2>
+                        <p className="text-secondary mt-2">Crie seu perfil para começar sua jornada.</p>
+                    </header>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="name" className="form-label">Seu Nome</label>
+                            <input
+                                id="name"
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="input text-lg text-center"
+                                placeholder="Como podemos te chamar?"
+                                required
+                                autoFocus
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label text-center">Escolha seu Avatar</label>
+                            <div className="avatar-grid">
+                                {avatars.map(avatar => (
+                                    <button
+                                        key={avatar}
+                                        type="button"
+                                        className={`avatar-selector ${selectedAvatar === avatar ? 'selected' : ''}`}
+                                        onClick={() => setSelectedAvatar(avatar)}
+                                    >
+                                        {avatar}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-primary w-full text-lg mt-4" disabled={!name.trim()}>
+                            Começar Jornada <ArrowRightIcon className="icon-right" />
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Dashboard = ({ user, stats, onViewChange, weeklyGoals, pendingFeatures, onShowModal }) => (
     <div className="view-container">
         <header className="dashboard-hero text-center">
-            <h1>Pequenos Passos</h1>
-            <p>Sua Jornada para uma Vida Extraordinária.</p>
+            <div className="dashboard-header">
+                <h1>Pequenos Passos</h1>
+                <button className="profile-avatar-btn" onClick={() => onViewChange('profile')} aria-label="Ver perfil">
+                    {user.avatar}
+                </button>
+            </div>
+            <p>Sua Jornada para uma Vida Extraordinária, {user.name}.</p>
             <div className="stats-grid">
                 <div className="card stat-card-clickable" onClick={() => onViewChange('rewards')}>
                     <div className="stat-card-content">
@@ -498,11 +650,7 @@ const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowMo
         ) : (
             <div className="no-goals-card card">
                 <TargetIcon className="icon" />
-                <p>Nenhuma meta semanal definida ainda. Que tal gerar algumas ideias com IA?</p>
-                <button className="btn btn-primary" onClick={onGenerateGoals} disabled={isLoading}>
-                    {isLoading ? <SparklesIcon className="icon-left animate-spin" /> : <SparklesIcon className="icon-left" />}
-                    Gerar Metas
-                </button>
+                <p>Nenhuma meta semanal definida ainda. Que tal usar a varinha mágica para gerar algumas ideias personalizadas?</p>
             </div>
         )}
 
@@ -524,11 +672,7 @@ const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowMo
         ) : (
              <div className="no-features-card card">
                 <LightbulbIcon className="icon" />
-                <p>Nenhuma novidade planejada no momento. Sugira a próxima funcionalidade com IA!</p>
-                 <button className="btn btn-primary" onClick={onGenerateFeatures} disabled={isLoading}>
-                    {isLoading ? <LightbulbIcon className="icon-left animate-spin" /> : <LightbulbIcon className="icon-left" />}
-                    Sugerir Novidades
-                </button>
+                <p>Nenhuma novidade planejada no momento. Use o poder da IA para sugerir a próxima grande funcionalidade do app!</p>
             </div>
         )}
 
@@ -1450,8 +1594,151 @@ const PlannerTaskItem = ({ task, onToggle, onShowModal }) => {
     );
 };
 
+const ChallengesView = ({ challenges, tasks, user, onAddChallenge, setChallenges, onShowModal }) => {
+    
+    useEffect(() => {
+        // Simulate friend progress
+        const now = new Date();
+        const updatedChallenges = challenges.map(challenge => {
+            const updatedFriends = challenge.friends.map(friend => {
+                const lastUpdated = new Date(friend.lastUpdated);
+                const hoursDiff = (now.getTime() - lastUpdated.getTime()) / (1000 * 60 * 60);
+                if (hoursDiff > 12) { // Update roughly twice a day
+                    const scoreIncrease = Math.floor(Math.random() * 3); // 0, 1, or 2 tasks
+                    return { ...friend, score: friend.score + scoreIncrease, lastUpdated: now.toISOString() };
+                }
+                return friend;
+            });
+            return { ...challenge, friends: updatedFriends };
+        });
+        setChallenges(updatedChallenges);
+    }, []); // Run once on component mount
+
+    const startOfWeek = getStartOfWeek(new Date());
+    const tasksThisWeek = tasks.filter(t => t.completed && t.completedAt && new Date(t.completedAt) >= startOfWeek).length;
+
+    return (
+        <div className="view-container">
+            <header className="view-header">
+               <div className="view-header-content">
+                 <div className="flex items-center gap-4">
+                     <div className="task-header-icon-wrapper" style={{ backgroundColor: 'var(--accent-indigo-500)' }}>
+                        <UsersIcon className="icon" style={{ width: '2.5rem', height: '2.5rem', color: 'white' }} />
+                     </div>
+                     <div>
+                         <h1 className="text-3xl font-bold">Desafios Semanais</h1>
+                         <p className="text-lg text-secondary">Compita com seus amigos e motive-se!</p>
+                     </div>
+                 </div>
+               </div>
+            </header>
+            
+            {challenges.length > 0 ? (
+                <div className="challenges-grid">
+                    {challenges.map(challenge => (
+                        <LeaderboardCard key={challenge.id} challenge={challenge} user={user} userScore={tasksThisWeek} />
+                    ))}
+                </div>
+            ) : (
+                <div className="no-goals-card card">
+                    <UsersIcon className="icon" />
+                    <p>Você ainda não está em nenhum desafio. Que tal criar um e convidar seus amigos para uma competição amigável?</p>
+                </div>
+            )}
+
+            <div className="dashboard-actions">
+                <button className="btn btn-primary" onClick={() => onShowModal('addChallenge')}>
+                    <PlusIcon className="icon-left" />
+                    Criar Novo Desafio
+                </button>
+            </div>
+        </div>
+    );
+};
+
+const LeaderboardCard = ({ challenge, user, userScore }) => {
+    const playerList = [
+        { id: user.id, name: user.name, avatar: user.avatar, score: userScore, isUser: true },
+        ...challenge.friends
+    ].sort((a, b) => b.score - a.score);
+
+    return (
+        <div className="card leaderboard-card">
+            <div className="card-content">
+                <h3 className="leaderboard-title">{challenge.name}</h3>
+                <ol className="leaderboard-list">
+                    {playerList.map((player, index) => (
+                        <li key={player.id} className={`leaderboard-item ${player.isUser ? 'is-user' : ''}`}>
+                            <div className="leaderboard-rank">
+                                {index === 0 && <TrophyIcon style={{ color: 'var(--trophy-gold)' }} />}
+                                {index === 1 && <TrophyIcon style={{ color: 'var(--trophy-silver)' }} />}
+                                {index === 2 && <TrophyIcon style={{ color: 'var(--trophy-bronze)' }} />}
+                                {index > 2 && <span>{index + 1}</span>}
+                            </div>
+                            <div className="leaderboard-player">
+                                <span className="player-avatar">{player.avatar}</span>
+                                <span className="player-name">{player.name} {player.isUser && "(Você)"}</span>
+                            </div>
+                            <div className="leaderboard-score">{player.score} pts</div>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        </div>
+    );
+};
+
+const ProfileView = ({ user, onLogout, onUpdateUser }) => {
+    const [name, setName] = useState(user.name);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const handleSave = () => {
+        if (name.trim()) {
+            onUpdateUser({ ...user, name: name.trim() });
+            setIsEditing(false);
+        }
+    };
+    
+    return (
+        <div className="view-container">
+            <header className="view-header">
+                <div className="view-header-content text-center">
+                    <div className="profile-avatar-large">{user.avatar}</div>
+                    {isEditing ? (
+                         <input 
+                             type="text" 
+                             value={name}
+                             onChange={(e) => setName(e.target.value)}
+                             onBlur={handleSave}
+                             onKeyPress={(e) => e.key === 'Enter' && handleSave()}
+                             className="input profile-name-input"
+                             autoFocus
+                         />
+                    ) : (
+                        <h1 className="text-3xl font-bold mt-4" onClick={() => setIsEditing(true)}>
+                            {user.name}
+                        </h1>
+                    )}
+                    <p className="text-lg text-secondary">Gerencie suas informações.</p>
+                </div>
+            </header>
+            
+            <div className="profile-actions">
+                 <button className="btn btn-ghost" onClick={() => setIsEditing(true)}>
+                    <UserIcon className="icon-left" />
+                    Alterar Nome
+                </button>
+                <button className="btn btn-red" onClick={onLogout}>
+                    <LogOutIcon className="icon-left" />
+                    Sair (Logout)
+                </button>
+            </div>
+        </div>
+    );
+};
+
 const TodaysTasksHeader = ({ tasks, onToggleTask, onViewChange }) => {
-    const [isExpanded, setIsExpanded] = useLocalStorage('todaysTasksExpanded', true);
+    const [isExpanded, setIsExpanded] = useUserLocalStorage('todaysTasksExpanded', true);
 
     const todaysTasks = useMemo(() => {
         const todayStr = new Date().toISOString().split('T')[0];
@@ -1657,6 +1944,148 @@ const RecurrenceModal = ({ task, onSave, onClose }) => {
     );
 };
 
+const CreateChallengeModal = ({ onSave, onClose }) => {
+    const [name, setName] = useState('Desafio Semanal');
+    const [friends, setFriends] = useState(['Amigo 1', 'Amigo 2', 'Amigo 3']);
+
+    const handleFriendChange = (index, value) => {
+        const newFriends = [...friends];
+        newFriends[index] = value;
+        setFriends(newFriends);
+    };
+
+    const handleSave = () => {
+        const now = new Date();
+        const endOfWeek = getEndOfWeek(now);
+        const challengeFriends: ChallengeFriend[] = friends
+            .filter(f => f.trim() !== '')
+            .map(f => ({
+                id: crypto.randomUUID(),
+                name: f.trim(),
+                avatar: avatars[Math.floor(Math.random() * avatars.length)],
+                score: Math.floor(Math.random() * 5), // Start with a random score
+                lastUpdated: now.toISOString(),
+            }));
+        
+        onSave({
+            name: name.trim(),
+            endDate: endOfWeek.toISOString(),
+            friends: challengeFriends,
+        });
+        onClose();
+    };
+
+    return (
+        <div className="space-y-4">
+            <div className="form-group">
+                <label htmlFor="challengeName" className="form-label">Nome do Desafio</label>
+                <input id="challengeName" type="text" value={name} onChange={e => setName(e.target.value)} className="input" />
+            </div>
+            <div className="form-group">
+                <label className="form-label">Convide seus Amigos</label>
+                <div className="space-y-2">
+                    {friends.map((friend, index) => (
+                        <input
+                            key={index}
+                            type="text"
+                            value={friend}
+                            onChange={e => handleFriendChange(index, e.target.value)}
+                            className="input"
+                            placeholder={`Nome do Amigo ${index + 1}`}
+                        />
+                    ))}
+                </div>
+                <p className="form-help-text">Adicione os nomes dos amigos para competir. O progresso deles será simulado.</p>
+            </div>
+             <div className="modal-actions">
+                <button onClick={onClose} className="btn btn-ghost">Cancelar</button>
+                <button onClick={handleSave} className="btn btn-primary">Criar Desafio</button>
+            </div>
+        </div>
+    )
+};
+
+const VoiceCommandModal: React.FC<{ onCommand: (command: string) => void; onClose: () => void; isProcessing: boolean; error: string | null }> = ({ onCommand, onClose, isProcessing, error }) => {
+    const [isListening, setIsListening] = useState(false);
+    const [transcript, setTranscript] = useState('');
+    const recognitionRef = useRef<any>(null);
+    const transcriptRef = useRef('');
+
+    useEffect(() => {
+        transcriptRef.current = transcript;
+    }, [transcript]);
+
+    useEffect(() => {
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            console.error("Seu navegador não suporta a API de Reconhecimento de Voz.");
+            return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'pt-BR';
+        recognition.interimResults = true;
+
+        recognition.onresult = (event) => {
+            const currentTranscript = Array.from(event.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join('');
+            setTranscript(currentTranscript);
+        };
+
+        recognition.onend = () => {
+            setIsListening(false);
+            if (transcriptRef.current.trim()) {
+                onCommand(transcriptRef.current.trim());
+            }
+        };
+        recognitionRef.current = recognition;
+
+        return () => {
+            if (recognitionRef.current) {
+                recognitionRef.current.stop();
+            }
+        };
+    }, [onCommand]);
+
+    const handleListen = () => {
+        if (isListening) {
+            recognitionRef.current.stop();
+        } else {
+            setTranscript('');
+            transcriptRef.current = '';
+            recognitionRef.current.start();
+            setIsListening(true);
+        }
+    };
+
+    return (
+        <div className="voice-modal-body">
+            <div className="voice-modal-content-centered">
+                {isProcessing ? (
+                     <>
+                        <SparklesIcon className="icon animate-spin text-primary" style={{ width: '3rem', height: '3rem' }} />
+                        <p>Processando seu comando...</p>
+                    </>
+                ) : (
+                    <>
+                        <p>{isListening ? 'Ouvindo...' : 'Pressione o microfone para começar'}</p>
+                        <button
+                            onClick={handleListen}
+                            className={`btn btn-lg ${isListening ? 'recording' : 'btn-primary'}`}
+                            aria-label={isListening ? 'Parar de ouvir' : 'Começar a ouvir'}
+                        >
+                            <MicIcon className="icon" />
+                        </button>
+                        {transcript && <p className="text-sm mt-4"><em>"{transcript}"</em></p>}
+                        {error && <p className="text-red-500 mt-2">{error}</p>}
+                    </>
+                )}
+            </div>
+        </div>
+    );
+};
+
 const DatePickerModal = ({ currentDate, onDateSelect, onClose }) => {
     const [displayDate, setDisplayDate] = useState(currentDate || new Date());
 
@@ -1708,7 +2137,35 @@ const DatePickerModal = ({ currentDate, onDateSelect, onClose }) => {
     );
 };
 
-const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures }) => {
+const ActionButton = ({ onGenerateGoals, onGenerateFeatures, onShowVoiceModal, isLoading, hasGoals, hasFeatures }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="action-button-container">
+             {isOpen && (
+                <div className="action-options">
+                    <button className="action-option-btn" onClick={onShowVoiceModal} style={{ animationDelay: '0.2s' }}>
+                        <span className="action-option-label">Comando de Voz</span>
+                        <MicIcon className="icon" />
+                    </button>
+                    <button className="action-option-btn" onClick={onGenerateFeatures} disabled={hasFeatures || isLoading} style={{ animationDelay: '0.1s' }}>
+                        <span className="action-option-label">Sugerir Novidades</span>
+                        <LightbulbIcon className="icon" />
+                    </button>
+                    <button className="action-option-btn" onClick={onGenerateGoals} disabled={hasGoals || isLoading} style={{ animationDelay: '0s' }}>
+                        <span className="action-option-label">Gerar Metas</span>
+                         <SparklesIcon className="icon" />
+                    </button>
+                </div>
+            )}
+            <button className={`main-action-btn ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen}>
+                {isLoading ? <div className="animate-spin"><SparklesIcon className="icon" /></div> : isOpen ? <XIcon className="icon" /> : <PlusIcon className="icon" />}
+            </button>
+        </div>
+    );
+};
+
+const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, onCompleteTask }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const ai = useMemo(() => new GoogleGenAI({ apiKey: process.env.API_KEY as string }), []);
@@ -1807,7 +2264,53 @@ const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures }) => {
         }
     };
 
-    return children({ isLoading, error, generateWeeklyGoals, generatePendingFeatures });
+    const handleVoiceCommand = async (command: string) => {
+        const prompt = `
+            Você é um assistente para o aplicativo "Pequenos Passos".
+            Analise o comando do usuário e determine a intenção e as entidades.
+            O comando é: "${command}"
+
+            As intenções possíveis são: 'ADD_TASK', 'COMPLETE_TASK', 'UNKNOWN'.
+            
+            Para 'ADD_TASK', as entidades são:
+            - text: o nome da tarefa (obrigatório)
+            - areaId: a área da tarefa (opcional, use uma das chaves: ${Object.keys(healthAreas).join(', ')})
+            - dueDate: a data de vencimento (opcional, formato YYYY-MM-DD)
+
+            Para 'COMPLETE_TASK', a entidade é:
+            - text: o nome da tarefa a ser concluída (obrigatório)
+
+            Responda APENAS com o JSON.
+        `;
+        const schema = {
+            type: Type.OBJECT,
+            properties: {
+                intent: { type: Type.STRING, enum: ['ADD_TASK', 'COMPLETE_TASK', 'UNKNOWN'] },
+                entities: { type: Type.OBJECT, properties: {
+                    text: { type: Type.STRING },
+                    areaId: { type: Type.STRING, enum: Object.keys(healthAreas) },
+                    dueDate: { type: Type.STRING }
+                }}
+            }
+        };
+        const result = await callGemini(prompt, schema);
+        if (result) {
+            if (result.intent === 'ADD_TASK' && result.entities.text) {
+                onAddTask({
+                    text: result.entities.text,
+                    areaId: result.entities.areaId || 'social',
+                    dueDate: result.entities.dueDate || new Date().toISOString().split('T')[0],
+                });
+            } else if (result.intent === 'COMPLETE_TASK' && result.entities.text) {
+                onCompleteTask(result.entities.text);
+            } else {
+                setError("Não entendi o comando. Tente algo como 'Adicionar tarefa ler um livro' ou 'Concluir a tarefa meditar'.");
+            }
+        }
+    };
+
+
+    return children({ isLoading, error, generateWeeklyGoals, generatePendingFeatures, handleVoiceCommand });
 };
 
 // --- Helper Components & Functions ---
@@ -1917,22 +2420,50 @@ const ProgressChart = ({ tasks }) => {
     );
 };
 
-function useLocalStorage<T>(key: string, initialValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
+function useUserLocalStorage<T>(key: string, initialValue: T | (() => T), userId: string | null = null): [T, React.Dispatch<React.SetStateAction<T>>] {
+    const getCompositeKey = useCallback(() => (userId ? `${key}_${userId}` : key), [key, userId]);
+
     const [storedValue, setStoredValue] = useState<T>(() => {
+        // Don't load user-specific data on initial render if there's no user,
+        // unless it's the user profile itself.
+        if (!userId && key !== 'userProfile') {
+            return initialValue instanceof Function ? initialValue() : initialValue;
+        }
         try {
-            const item = window.localStorage.getItem(key);
-            return item ? JSON.parse(item) : initialValue;
+            const item = window.localStorage.getItem(getCompositeKey());
+            return item ? JSON.parse(item) : (initialValue instanceof Function ? initialValue() : initialValue);
         } catch (error) {
             console.error(error);
-            return initialValue;
+            return initialValue instanceof Function ? initialValue() : initialValue;
         }
     });
 
+    // This effect re-syncs state from localStorage when the user logs in or out.
+    useEffect(() => {
+        // If there's no user, and this is user-specific data, reset to initial state.
+        if (!userId && key !== 'userProfile') {
+            setStoredValue(initialValue instanceof Function ? initialValue() : initialValue);
+            return;
+        }
+        try {
+            const item = window.localStorage.getItem(getCompositeKey());
+            setStoredValue(item ? JSON.parse(item) : (initialValue instanceof Function ? initialValue() : initialValue));
+        } catch (error) {
+            console.error(error);
+            setStoredValue(initialValue instanceof Function ? initialValue() : initialValue);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userId, key]);
+
     const setValue: React.Dispatch<React.SetStateAction<T>> = (value) => {
+        // Do not save user-specific data if there is no user logged in.
+        if (!userId && key !== 'userProfile') {
+            return;
+        }
         try {
             const valueToStore = value instanceof Function ? value(storedValue) : value;
             setStoredValue(valueToStore);
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+            window.localStorage.setItem(getCompositeKey(), JSON.stringify(valueToStore));
         } catch (error) {
             console.error(error);
         }
