@@ -11,7 +11,7 @@ import { GoogleGenAI, GenerateContentResponse, Type } from "@google/genai";
 declare var TimestampTrigger: any;
 
 // --- Icon Components (replaces lucide-react) ---
-const TrophyIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>);
+const TrophyIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>);
 const TargetIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
 const CheckCircle2Icon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>);
 const CircleIcon = ({ className = '', ...props }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`icon ${className}`} {...props} aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>);
@@ -302,20 +302,6 @@ const App: React.FC = () => {
         setPendingFeatures(newFeatures);
     };
 
-    // Voice Command Handlers
-    const handleVoiceAddTask = (taskData: { text: string; areaId: keyof typeof healthAreas; dueDate: string }) => {
-        addTask(taskData);
-        setActiveModal(null);
-    };
-
-    const handleVoiceCompleteTask = (taskText: string) => {
-        const taskToComplete = tasks.find(t => t.text.toLowerCase().includes(taskText.toLowerCase()) && !t.completed);
-        if (taskToComplete) {
-            toggleTask(taskToComplete.id, true);
-        }
-        setActiveModal(null);
-    };
-
     // Notifications
     useEffect(() => {
         if ('Notification' in window && Notification.permission !== 'granted') {
@@ -362,90 +348,83 @@ const App: React.FC = () => {
     };
 
 
-    const renderView = () => {
-        switch (view) {
-            case 'tasks':
-                return <TasksView
-                    tasks={tasks}
-                    currentArea={currentArea}
-                    onAddTask={addTask}
-                    onToggleTask={toggleTask}
-                    onEditTask={editTask}
-                    onDeleteTask={deleteTask}
-                    onUpdateTaskSettings={updateTaskSettings}
-                    onBack={() => handleViewChange('dashboard')}
-                    onShowModal={showModal}
-                    runLogs={runLogs}
-                    onAddRunLog={addRunLog}
-                    />;
-            case 'rewards':
-                return <RewardsView tasks={tasks} />;
-            case 'progress':
-                return <ProgressView tasks={tasks} />;
-            case 'planner':
-                return <PlannerView
-                    tasks={tasks}
-                    onToggleTask={toggleTask}
-                    onShowModal={showModal}
-                    />;
-            case 'dashboard':
-            default:
-                return <Dashboard
-                    stats={stats}
-                    onViewChange={handleViewChange}
-                    weeklyGoals={weeklyGoals}
-                    pendingFeatures={pendingFeatures}
-                    onShowModal={showModal}
-                    />;
-        }
-    };
-
     return (
         <GeminiWrapper
             tasks={tasks}
             onNewGoals={handleNewGoals}
             onNewFeatures={handleNewFeatures}
-            onAddTask={handleVoiceAddTask}
-            onCompleteTask={handleVoiceCompleteTask}
         >
-            {({ isLoading: isAILoading, error: aiError, generateWeeklyGoals, generatePendingFeatures, handleVoiceCommand }: any) => (
-                <main className="app-container">
-                    <TodaysTasksHeader
-                        tasks={tasks}
-                        onToggleTask={toggleTask}
-                        onViewChange={handleViewChange}
-                    />
-                    <div className={`view-wrapper ${activeModal ? 'blurred' : ''}`}>
-                         {renderView()}
-                    </div>
-                     <BottomNavBar activeView={view} onViewChange={handleViewChange} />
-                     <Modal
-                        isOpen={!!activeModal}
-                        onClose={closeModal}
-                        title={
-                          activeModal === 'alarms' ? 'Alarmes Agendados' :
-                          activeModal === 'recurrence' ? 'Editar Tarefa' :
-                          activeModal === 'voice' ? 'Comando de Voz' :
-                          activeModal === 'datepicker' ? 'Selecione a Data' :
-                          'Modal'
-                        }
-                      >
-                        {activeModal === 'alarms' && <AlarmListModal tasks={tasks} onClose={closeModal} />}
-                        {activeModal === 'recurrence' && <RecurrenceModal task={modalData} onSave={(settings) => { updateTaskSettings(modalData.id, settings); closeModal(); }} onClose={closeModal} />}
-                        {activeModal === 'voice' && <VoiceCommandModal onCommand={handleVoiceCommand} onClose={closeModal} isProcessing={isAILoading} error={aiError} />}
-                        {activeModal === 'datepicker' && <DatePickerModal currentDate={modalData.currentDate} onDateSelect={(date) => { modalData.onDateSelect(date); closeModal(); }} onClose={closeModal} />}
+            {({ isLoading: isAILoading, error: aiError, generateWeeklyGoals, generatePendingFeatures }: any) => {
+                const renderView = () => {
+                    switch (view) {
+                        case 'tasks':
+                            return <TasksView
+                                tasks={tasks}
+                                currentArea={currentArea}
+                                onAddTask={addTask}
+                                onToggleTask={toggleTask}
+                                onEditTask={editTask}
+                                onDeleteTask={deleteTask}
+                                onUpdateTaskSettings={updateTaskSettings}
+                                onBack={() => handleViewChange('dashboard')}
+                                onShowModal={showModal}
+                                runLogs={runLogs}
+                                onAddRunLog={addRunLog}
+                                />;
+                        case 'rewards':
+                            return <RewardsView tasks={tasks} />;
+                        case 'progress':
+                            return <ProgressView tasks={tasks} />;
+                        case 'planner':
+                            return <PlannerView
+                                tasks={tasks}
+                                onToggleTask={toggleTask}
+                                onShowModal={showModal}
+                                />;
+                        case 'dashboard':
+                        default:
+                            return <Dashboard
+                                stats={stats}
+                                onViewChange={handleViewChange}
+                                weeklyGoals={weeklyGoals}
+                                pendingFeatures={pendingFeatures}
+                                onShowModal={showModal}
+                                onGenerateGoals={generateWeeklyGoals}
+                                onGenerateFeatures={generatePendingFeatures}
+                                isLoading={isAILoading}
+                                />;
+                    }
+                };
+                
+                return (
+                    <main className="app-container">
+                        <TodaysTasksHeader
+                            tasks={tasks}
+                            onToggleTask={toggleTask}
+                            onViewChange={handleViewChange}
+                        />
+                        <div className={`view-wrapper ${activeModal ? 'blurred' : ''}`}>
+                             {renderView()}
+                        </div>
+                         <BottomNavBar activeView={view} onViewChange={handleViewChange} />
+                         <Modal
+                            isOpen={!!activeModal}
+                            onClose={closeModal}
+                            title={
+                              activeModal === 'alarms' ? 'Alarmes Agendados' :
+                              activeModal === 'recurrence' ? 'Editar Tarefa' :
+                              activeModal === 'datepicker' ? 'Selecione a Data' :
+                              'Modal'
+                            }
+                          >
+                            {activeModal === 'alarms' && <AlarmListModal tasks={tasks} onClose={closeModal} />}
+                            {activeModal === 'recurrence' && <RecurrenceModal task={modalData} onSave={(settings) => { updateTaskSettings(modalData.id, settings); closeModal(); }} onClose={closeModal} />}
+                            {activeModal === 'datepicker' && <DatePickerModal currentDate={modalData.currentDate} onDateSelect={(date) => { modalData.onDateSelect(date); closeModal(); }} onClose={closeModal} />}
 
-                      </Modal>
-                      <ActionButton
-                          onGenerateGoals={generateWeeklyGoals}
-                          onGenerateFeatures={generatePendingFeatures}
-                          onShowVoiceModal={() => showModal('voice')}
-                          isLoading={isAILoading}
-                          hasGoals={weeklyGoals.length > 0}
-                          hasFeatures={pendingFeatures.length > 0}
-                      />
-                </main>
-            )}
+                          </Modal>
+                    </main>
+                );
+            }}
         </GeminiWrapper>
     );
 };
@@ -453,75 +432,51 @@ const App: React.FC = () => {
 
 // --- VIEWS ---
 
-const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowModal }) => (
+const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowModal, onGenerateGoals, onGenerateFeatures, isLoading }) => (
     <div className="view-container">
         <header className="dashboard-hero text-center">
             <h1>Pequenos Passos</h1>
             <p>Sua Jornada para uma Vida Extraordinária.</p>
-        </header>
-        
-        {/* Main call to action: Health Areas */}
-        <div className="main-areas-wrapper">
-            <h2 className="section-title">Por onde começar?</h2>
-            <div className="areas-grid">
-                {Object.entries(healthAreas).map(([id, { name, icon: Icon, color }]) => (
-                    <div
-                        key={id}
-                        className="card area-card text-center"
-                        onClick={() => onViewChange('tasks', id as keyof typeof healthAreas)}
-                        style={{ '--area-color': color } as React.CSSProperties}
-                    >
-                        <div className="card-content">
-                            <div className="area-card-icon-wrapper">
-                                <Icon className="icon" />
-                            </div>
-                            <h3>{name}</h3>
+            <div className="stats-grid">
+                <div className="card stat-card-clickable" onClick={() => onViewChange('rewards')}>
+                    <div className="stat-card-content">
+                        <FlameIcon className="icon" style={{ color: 'var(--accent-orange)'}}/>
+                        <div>
+                            <div className="stat-value">{stats.streak}</div>
+                            <div className="stat-label">Dias em sequência</div>
                         </div>
                     </div>
-                ))}
-            </div>
-        </div>
-
-        {/* Stats grid, now separate */}
-        <div className="stats-grid">
-            <div className="card stat-card-clickable" onClick={() => onViewChange('rewards')}>
-                <div className="stat-card-content">
-                    <FlameIcon className="icon" style={{ color: 'var(--accent-orange)'}}/>
-                    <div>
-                        <div className="stat-value">{stats.streak}</div>
-                        <div className="stat-label">Dias em sequência</div>
+                </div>
+                <div className="card">
+                    <div className="stat-card-content">
+                        <TrophyIcon className="icon" style={{ color: 'var(--accent-yellow)'}}/>
+                        <div>
+                            <div className="stat-value">{stats.totalCompleted}</div>
+                            <div className="stat-label">Tarefas concluídas</div>
+                        </div>
+                    </div>
+                </div>
+                 <div className="card">
+                    <div className="stat-card-content">
+                       <CheckCircle2Icon className="icon" style={{ color: 'var(--accent-green-500)'}}/>
+                       <div>
+                            <div className="stat-value">{stats.weeklyCompleted}</div>
+                            <div className="stat-label">Concluídas na semana</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card">
+                    <div className="stat-card-content">
+                       <TargetIcon className="icon" style={{ color: 'var(--accent-blue-500)'}}/>
+                       <div>
+                            <div className="stat-value">{stats.totalGoals}</div>
+                            <div className="stat-label">Metas semanais</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="card">
-                <div className="stat-card-content">
-                    <TrophyIcon className="icon" style={{ color: 'var(--accent-yellow)'}}/>
-                    <div>
-                        <div className="stat-value">{stats.totalCompleted}</div>
-                        <div className="stat-label">Tarefas concluídas</div>
-                    </div>
-                </div>
-            </div>
-             <div className="card">
-                <div className="stat-card-content">
-                   <CheckCircle2Icon className="icon" style={{ color: 'var(--accent-green-500)'}}/>
-                   <div>
-                        <div className="stat-value">{stats.weeklyCompleted}</div>
-                        <div className="stat-label">Concluídas na semana</div>
-                    </div>
-                </div>
-            </div>
-            <div className="card">
-                <div className="stat-card-content">
-                   <TargetIcon className="icon" style={{ color: 'var(--accent-blue-500)'}}/>
-                   <div>
-                        <div className="stat-value">{stats.totalGoals}</div>
-                        <div className="stat-label">Metas semanais</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        </header>
+        
         <h2 className="section-title">Suas Metas da Semana</h2>
         {weeklyGoals.length > 0 ? (
             <div className="weekly-goals-grid">
@@ -543,7 +498,11 @@ const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowMo
         ) : (
             <div className="no-goals-card card">
                 <TargetIcon className="icon" />
-                <p>Nenhuma meta semanal definida ainda. Que tal usar a varinha mágica para gerar algumas ideias personalizadas?</p>
+                <p>Nenhuma meta semanal definida ainda. Que tal gerar algumas ideias com IA?</p>
+                <button className="btn btn-primary" onClick={onGenerateGoals} disabled={isLoading}>
+                    {isLoading ? <SparklesIcon className="icon-left animate-spin" /> : <SparklesIcon className="icon-left" />}
+                    Gerar Metas
+                </button>
             </div>
         )}
 
@@ -565,9 +524,26 @@ const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowMo
         ) : (
              <div className="no-features-card card">
                 <LightbulbIcon className="icon" />
-                <p>Nenhuma novidade planejada no momento. Use o poder da IA para sugerir a próxima grande funcionalidade do app!</p>
+                <p>Nenhuma novidade planejada no momento. Sugira a próxima funcionalidade com IA!</p>
+                 <button className="btn btn-primary" onClick={onGenerateFeatures} disabled={isLoading}>
+                    {isLoading ? <LightbulbIcon className="icon-left animate-spin" /> : <LightbulbIcon className="icon-left" />}
+                    Sugerir Novidades
+                </button>
             </div>
         )}
+
+
+        <h2 className="section-title">Territórios do Bem-Estar</h2>
+        <div className="areas-grid">
+            {Object.entries(healthAreas).map(([id, { name, icon: Icon }]) => (
+                <div key={id} className="card area-card text-center" onClick={() => onViewChange('tasks', id as keyof typeof healthAreas)}>
+                    <div className="card-content">
+                        <Icon className="icon" style={{ width: '3rem', height: '3rem', margin: '0 auto', color: 'var(--primary)' }} />
+                        <h3>{name}</h3>
+                    </div>
+                </div>
+            ))}
+        </div>
 
         <div className="dashboard-actions">
             <button className="btn btn-primary" onClick={() => onViewChange('rewards')}>
@@ -1145,7 +1121,6 @@ const useServiceWorker = () => {
                     // This was causing a downstream error where `currentTrackIndex` was treated as `unknown`
                     // and could not be used as an array index (which must be a number).
                     // Casting the payload to the correct `PlayerState` type ensures type safety.
-// FIX: Cast event.data.payload to PlayerState to ensure type safety.
                     const payload = event.data.payload as PlayerState;
                     if (payload) {
                         setPlayerState({
@@ -1682,87 +1657,6 @@ const RecurrenceModal = ({ task, onSave, onClose }) => {
     );
 };
 
-const VoiceCommandModal: React.FC<{ onCommand: (command: string) => void; onClose: () => void; isProcessing: boolean; error: string | null }> = ({ onCommand, onClose, isProcessing, error }) => {
-    const [isListening, setIsListening] = useState(false);
-    const [transcript, setTranscript] = useState('');
-    const recognitionRef = useRef<any>(null);
-    const transcriptRef = useRef('');
-
-    useEffect(() => {
-        transcriptRef.current = transcript;
-    }, [transcript]);
-
-    useEffect(() => {
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (!SpeechRecognition) {
-            console.error("Seu navegador não suporta a API de Reconhecimento de Voz.");
-            return;
-        }
-        const recognition = new SpeechRecognition();
-        recognition.lang = 'pt-BR';
-        recognition.interimResults = true;
-
-        recognition.onresult = (event) => {
-            const currentTranscript = Array.from(event.results)
-                .map(result => result[0])
-                .map(result => result.transcript)
-                .join('');
-            setTranscript(currentTranscript);
-        };
-
-        recognition.onend = () => {
-            setIsListening(false);
-            if (transcriptRef.current.trim()) {
-                onCommand(transcriptRef.current.trim());
-            }
-        };
-        recognitionRef.current = recognition;
-
-        return () => {
-            if (recognitionRef.current) {
-                recognitionRef.current.stop();
-            }
-        };
-    }, [onCommand]);
-
-    const handleListen = () => {
-        if (isListening) {
-            recognitionRef.current.stop();
-        } else {
-            setTranscript('');
-            transcriptRef.current = '';
-            recognitionRef.current.start();
-            setIsListening(true);
-        }
-    };
-
-    return (
-        <div className="voice-modal-body">
-            <div className="voice-modal-content-centered">
-                {isProcessing ? (
-                     <>
-                        <SparklesIcon className="icon animate-spin text-primary" style={{ width: '3rem', height: '3rem' }} />
-                        <p>Processando seu comando...</p>
-                    </>
-                ) : (
-                    <>
-                        <p>{isListening ? 'Ouvindo...' : 'Pressione o microfone para começar'}</p>
-                        <button
-                            onClick={handleListen}
-                            className={`btn btn-lg ${isListening ? 'recording' : 'btn-primary'}`}
-                            aria-label={isListening ? 'Parar de ouvir' : 'Começar a ouvir'}
-                        >
-                            <MicIcon className="icon" />
-                        </button>
-                        {transcript && <p className="text-sm mt-4"><em>"{transcript}"</em></p>}
-                        {error && <p className="text-red-500 mt-2">{error}</p>}
-                    </>
-                )}
-            </div>
-        </div>
-    );
-};
-
 const DatePickerModal = ({ currentDate, onDateSelect, onClose }) => {
     const [displayDate, setDisplayDate] = useState(currentDate || new Date());
 
@@ -1814,35 +1708,7 @@ const DatePickerModal = ({ currentDate, onDateSelect, onClose }) => {
     );
 };
 
-const ActionButton = ({ onGenerateGoals, onGenerateFeatures, onShowVoiceModal, isLoading, hasGoals, hasFeatures }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-        <div className="action-button-container">
-             {isOpen && (
-                <div className="action-options">
-                    <button className="action-option-btn" onClick={onShowVoiceModal} style={{ animationDelay: '0.2s' }}>
-                        <span className="action-option-label">Comando de Voz</span>
-                        <MicIcon className="icon" />
-                    </button>
-                    <button className="action-option-btn" onClick={onGenerateFeatures} disabled={hasFeatures || isLoading} style={{ animationDelay: '0.1s' }}>
-                        <span className="action-option-label">Sugerir Novidades</span>
-                        <LightbulbIcon className="icon" />
-                    </button>
-                    <button className="action-option-btn" onClick={onGenerateGoals} disabled={hasGoals || isLoading} style={{ animationDelay: '0s' }}>
-                        <span className="action-option-label">Gerar Metas</span>
-                         <SparklesIcon className="icon" />
-                    </button>
-                </div>
-            )}
-            <button className={`main-action-btn ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen}>
-                {isLoading ? <div className="animate-spin"><SparklesIcon className="icon" /></div> : isOpen ? <XIcon className="icon" /> : <PlusIcon className="icon" />}
-            </button>
-        </div>
-    );
-};
-
-const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, onCompleteTask }) => {
+const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const ai = useMemo(() => new GoogleGenAI({ apiKey: process.env.API_KEY as string }), []);
@@ -1941,53 +1807,7 @@ const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, 
         }
     };
 
-    const handleVoiceCommand = async (command: string) => {
-        const prompt = `
-            Você é um assistente para o aplicativo "Pequenos Passos".
-            Analise o comando do usuário e determine a intenção e as entidades.
-            O comando é: "${command}"
-
-            As intenções possíveis são: 'ADD_TASK', 'COMPLETE_TASK', 'UNKNOWN'.
-            
-            Para 'ADD_TASK', as entidades são:
-            - text: o nome da tarefa (obrigatório)
-            - areaId: a área da tarefa (opcional, use uma das chaves: ${Object.keys(healthAreas).join(', ')})
-            - dueDate: a data de vencimento (opcional, formato YYYY-MM-DD)
-
-            Para 'COMPLETE_TASK', a entidade é:
-            - text: o nome da tarefa a ser concluída (obrigatório)
-
-            Responda APENAS com o JSON.
-        `;
-        const schema = {
-            type: Type.OBJECT,
-            properties: {
-                intent: { type: Type.STRING, enum: ['ADD_TASK', 'COMPLETE_TASK', 'UNKNOWN'] },
-                entities: { type: Type.OBJECT, properties: {
-                    text: { type: Type.STRING },
-                    areaId: { type: Type.STRING, enum: Object.keys(healthAreas) },
-                    dueDate: { type: Type.STRING }
-                }}
-            }
-        };
-        const result = await callGemini(prompt, schema);
-        if (result) {
-            if (result.intent === 'ADD_TASK' && result.entities.text) {
-                onAddTask({
-                    text: result.entities.text,
-                    areaId: result.entities.areaId || 'social',
-                    dueDate: result.entities.dueDate || new Date().toISOString().split('T')[0],
-                });
-            } else if (result.intent === 'COMPLETE_TASK' && result.entities.text) {
-                onCompleteTask(result.entities.text);
-            } else {
-                setError("Não entendi o comando. Tente algo como 'Adicionar tarefa ler um livro' ou 'Concluir a tarefa meditar'.");
-            }
-        }
-    };
-
-
-    return children({ isLoading, error, generateWeeklyGoals, generatePendingFeatures, handleVoiceCommand });
+    return children({ isLoading, error, generateWeeklyGoals, generatePendingFeatures });
 };
 
 // --- Helper Components & Functions ---

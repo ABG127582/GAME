@@ -352,7 +352,7 @@ button {
 
 @keyframes progress-sheen {
   from { transform: translateX(-100%); }
-  to { translateX(100%); }
+  to { transform: translateX(100%); }
 }
 
 .badge {
@@ -392,12 +392,15 @@ input[type="time"].input {
 
 /* 4. DASHBOARD VIEW */
 .dashboard-hero {
-  background-color: transparent; /* No background, it's just a text header */
-  padding: 2rem 2rem 0;
-  margin-bottom: 0;
-  border: none;
-  box-shadow: none;
-  background-image: none;
+  background-color: var(--surface);
+  color: var(--foreground);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
 }
 .dashboard-hero h1 {
   font-size: clamp(2.5rem, 6vw, 3.5rem);
@@ -409,93 +412,28 @@ input[type="time"].input {
   font-size: 1.125rem;
   font-weight: 400;
   color: var(--text-secondary);
-  margin-bottom: 0;
+  margin-bottom: 2.5rem;
 }
-.main-areas-wrapper {
-    margin-bottom: 3rem;
-}
-.main-areas-wrapper .section-title {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-}
-
-.areas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-}
-
-.area-card {
-  cursor: pointer;
-  border: 1px solid var(--border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.area-card .card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 1.5rem 1rem;
-}
-
-.area-card-icon-wrapper {
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--area-color);
-    transition: all 0.3s ease;
-}
-
-.area-card-icon-wrapper .icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    color: var(--primary-foreground);
-}
-
-.area-card h3 {
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin: 0;
-    transition: color 0.3s ease;
-}
-
-.area-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.25);
-  border-color: var(--area-color);
-}
-
-.area-card:hover h3 {
-    color: var(--area-color);
-}
-
-.area-card:hover .area-card-icon-wrapper {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px color-mix(in srgb, var(--area-color) 50%, transparent);
-}
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   text-align: left;
-  margin-bottom: 3rem;
 }
 .stats-grid .card {
-    background-color: var(--surface); /* Restore background */
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 .stat-card-content {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+.stat-card-content .icon {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
 }
 .stat-value {
     font-size: 2rem;
@@ -577,6 +515,9 @@ input[type="time"].input {
     margin: 0 auto;
     line-height: 1.7;
 }
+.no-goals-card .btn {
+    margin-top: 1rem;
+}
 
 .pending-features-grid {
     display: grid;
@@ -627,6 +568,30 @@ input[type="time"].input {
     max-width: 450px;
     margin: 0 auto;
     line-height: 1.7;
+}
+.no-features-card .btn {
+    margin-top: 1rem;
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.area-card {
+  cursor: pointer;
+}
+.area-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.25);
+}
+.area-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+.area-card:hover h3 {
+    color: var(--primary);
 }
 
 .dashboard-actions {
@@ -1507,23 +1472,6 @@ input[type="time"].input {
   overflow-y: auto;
   flex-grow: 1;
 }
-.voice-modal-body {
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.voice-modal-content-centered {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-.voice-modal-content-centered p {
-    font-size: 1.125rem;
-    color: var(--text-secondary);
-}
 .alarm-list {
   list-style: none;
   padding: 0;
@@ -1661,12 +1609,6 @@ input[type="time"].input {
 @keyframes pulse {
   50% { opacity: .5; }
 }
-.btn.recording {
-    background-color: var(--warning-background);
-    color: var(--warning-text);
-    border-color: var(--warning-border);
-    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
 
 @keyframes checkmark-pop {
   0% {
@@ -1732,70 +1674,6 @@ input[type="time"].input {
 
 .task-item.completed .icon-check {
   animation: checkmark-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Action button styles */
-.action-button-container {
-    position: fixed;
-    bottom: 6rem; /* Adjusted for nav bar */
-    right: 2rem;
-    z-index: 40;
-}
-.main-action-btn {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-.main-action-btn:hover {
-    transform: scale(1.1);
-}
-.main-action-btn.open {
-    transform: rotate(45deg);
-    background-color: var(--accent-red-500);
-}
-.main-action-btn .icon {
-    width: 2rem;
-    height: 2rem;
-}
-.action-options {
-    position: absolute;
-    bottom: 5rem;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-end;
-}
-.action-option-btn {
-    display: flex;
-    align-items: center;
-    background-color: var(--surface);
-    color: var(--foreground);
-    border-radius: 99px;
-    padding: 0.5rem;
-    padding-left: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: slide-in-up 0.3s ease forwards;
-}
-.action-option-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: var(--border);
-}
-.action-option-btn .icon {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-.action-option-label {
-    margin: 0 0.75rem;
-    font-weight: 600;
 }
 
 /* 10. PLANNER VIEW */

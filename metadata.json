@@ -1,7 +1,5 @@
 {
   "name": "Pequenos Passos - App de Gamificação",
   "description": "Um aplicativo de gamificação para transformar grandes jornadas em pequenos passos, ajudando usuários a construir hábitos e alcançar metas.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }
