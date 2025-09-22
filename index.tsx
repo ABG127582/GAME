@@ -458,46 +458,70 @@ const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowMo
         <header className="dashboard-hero text-center">
             <h1>Pequenos Passos</h1>
             <p>Sua Jornada para uma Vida Extraordinária.</p>
-            <div className="stats-grid">
-                <div className="card stat-card-clickable" onClick={() => onViewChange('rewards')}>
-                    <div className="stat-card-content">
-                        <FlameIcon className="icon" style={{ color: 'var(--accent-orange)'}}/>
-                        <div>
-                            <div className="stat-value">{stats.streak}</div>
-                            <div className="stat-label">Dias em sequência</div>
+        </header>
+        
+        {/* Main call to action: Health Areas */}
+        <div className="main-areas-wrapper">
+            <h2 className="section-title">Por onde começar?</h2>
+            <div className="areas-grid">
+                {Object.entries(healthAreas).map(([id, { name, icon: Icon, color }]) => (
+                    <div
+                        key={id}
+                        className="card area-card text-center"
+                        onClick={() => onViewChange('tasks', id as keyof typeof healthAreas)}
+                        style={{ '--area-color': color } as React.CSSProperties}
+                    >
+                        <div className="card-content">
+                            <div className="area-card-icon-wrapper">
+                                <Icon className="icon" />
+                            </div>
+                            <h3>{name}</h3>
                         </div>
                     </div>
-                </div>
-                <div className="card">
-                    <div className="stat-card-content">
-                        <TrophyIcon className="icon" style={{ color: 'var(--accent-yellow)'}}/>
-                        <div>
-                            <div className="stat-value">{stats.totalCompleted}</div>
-                            <div className="stat-label">Tarefas concluídas</div>
-                        </div>
-                    </div>
-                </div>
-                 <div className="card">
-                    <div className="stat-card-content">
-                       <CheckCircle2Icon className="icon" style={{ color: 'var(--accent-green-500)'}}/>
-                       <div>
-                            <div className="stat-value">{stats.weeklyCompleted}</div>
-                            <div className="stat-label">Concluídas na semana</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="card">
-                    <div className="stat-card-content">
-                       <TargetIcon className="icon" style={{ color: 'var(--accent-blue-500)'}}/>
-                       <div>
-                            <div className="stat-value">{stats.totalGoals}</div>
-                            <div className="stat-label">Metas semanais</div>
-                        </div>
+                ))}
+            </div>
+        </div>
+
+        {/* Stats grid, now separate */}
+        <div className="stats-grid">
+            <div className="card stat-card-clickable" onClick={() => onViewChange('rewards')}>
+                <div className="stat-card-content">
+                    <FlameIcon className="icon" style={{ color: 'var(--accent-orange)'}}/>
+                    <div>
+                        <div className="stat-value">{stats.streak}</div>
+                        <div className="stat-label">Dias em sequência</div>
                     </div>
                 </div>
             </div>
-        </header>
-        
+            <div className="card">
+                <div className="stat-card-content">
+                    <TrophyIcon className="icon" style={{ color: 'var(--accent-yellow)'}}/>
+                    <div>
+                        <div className="stat-value">{stats.totalCompleted}</div>
+                        <div className="stat-label">Tarefas concluídas</div>
+                    </div>
+                </div>
+            </div>
+             <div className="card">
+                <div className="stat-card-content">
+                   <CheckCircle2Icon className="icon" style={{ color: 'var(--accent-green-500)'}}/>
+                   <div>
+                        <div className="stat-value">{stats.weeklyCompleted}</div>
+                        <div className="stat-label">Concluídas na semana</div>
+                    </div>
+                </div>
+            </div>
+            <div className="card">
+                <div className="stat-card-content">
+                   <TargetIcon className="icon" style={{ color: 'var(--accent-blue-500)'}}/>
+                   <div>
+                        <div className="stat-value">{stats.totalGoals}</div>
+                        <div className="stat-label">Metas semanais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h2 className="section-title">Suas Metas da Semana</h2>
         {weeklyGoals.length > 0 ? (
             <div className="weekly-goals-grid">
@@ -544,19 +568,6 @@ const Dashboard = ({ stats, onViewChange, weeklyGoals, pendingFeatures, onShowMo
                 <p>Nenhuma novidade planejada no momento. Use o poder da IA para sugerir a próxima grande funcionalidade do app!</p>
             </div>
         )}
-
-
-        <h2 className="section-title">Territórios do Bem-Estar</h2>
-        <div className="areas-grid">
-            {Object.entries(healthAreas).map(([id, { name, icon: Icon }]) => (
-                <div key={id} className="card area-card text-center" onClick={() => onViewChange('tasks', id as keyof typeof healthAreas)}>
-                    <div className="card-content">
-                        <Icon className="icon" style={{ width: '3rem', height: '3rem', margin: '0 auto', color: 'var(--primary)' }} />
-                        <h3>{name}</h3>
-                    </div>
-                </div>
-            ))}
-        </div>
 
         <div className="dashboard-actions">
             <button className="btn btn-primary" onClick={() => onViewChange('rewards')}>
@@ -1134,7 +1145,8 @@ const useServiceWorker = () => {
                     // This was causing a downstream error where `currentTrackIndex` was treated as `unknown`
                     // and could not be used as an array index (which must be a number).
                     // Casting the payload to the correct `PlayerState` type ensures type safety.
-                    const payload = event.data.payload;
+// FIX: Cast event.data.payload to PlayerState to ensure type safety.
+                    const payload = event.data.payload as PlayerState;
                     if (payload) {
                         setPlayerState({
                             isPlaying: payload.isPlaying,

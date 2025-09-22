@@ -352,7 +352,7 @@ button {
 
 @keyframes progress-sheen {
   from { transform: translateX(-100%); }
-  to { transform: translateX(100%); }
+  to { translateX(100%); }
 }
 
 .badge {
@@ -392,15 +392,12 @@ input[type="time"].input {
 
 /* 4. DASHBOARD VIEW */
 .dashboard-hero {
-  background-color: var(--surface);
-  color: var(--foreground);
-  border-radius: var(--radius-xl);
-  padding: 3rem 2rem;
-  margin-bottom: 2rem;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
-  background-image: radial-gradient(var(--border) 1px, transparent 1px);
-  background-size: 1.5rem 1.5rem;
+  background-color: transparent; /* No background, it's just a text header */
+  padding: 2rem 2rem 0;
+  margin-bottom: 0;
+  border: none;
+  box-shadow: none;
+  background-image: none;
 }
 .dashboard-hero h1 {
   font-size: clamp(2.5rem, 6vw, 3.5rem);
@@ -412,28 +409,93 @@ input[type="time"].input {
   font-size: 1.125rem;
   font-weight: 400;
   color: var(--text-secondary);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
+.main-areas-wrapper {
+    margin-bottom: 3rem;
+}
+.main-areas-wrapper .section-title {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.area-card {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.area-card .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+}
+
+.area-card-icon-wrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--area-color);
+    transition: all 0.3s ease;
+}
+
+.area-card-icon-wrapper .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--primary-foreground);
+}
+
+.area-card h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.area-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.25);
+  border-color: var(--area-color);
+}
+
+.area-card:hover h3 {
+    color: var(--area-color);
+}
+
+.area-card:hover .area-card-icon-wrapper {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--area-color) 50%, transparent);
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   text-align: left;
+  margin-bottom: 3rem;
 }
 .stats-grid .card {
-    background: transparent;
-    border: none;
-    box-shadow: none;
+    background-color: var(--surface); /* Restore background */
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
 }
 .stat-card-content {
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-.stat-card-content .icon {
-    width: 2rem;
-    height: 2rem;
-    flex-shrink: 0;
 }
 .stat-value {
     font-size: 2rem;
@@ -565,27 +627,6 @@ input[type="time"].input {
     max-width: 450px;
     margin: 0 auto;
     line-height: 1.7;
-}
-
-.areas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-.area-card {
-  cursor: pointer;
-}
-.area-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.25);
-}
-.area-card h3 {
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin: 1rem 0;
-}
-.area-card:hover h3 {
-    color: var(--primary);
 }
 
 .dashboard-actions {
