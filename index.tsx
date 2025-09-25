@@ -2168,7 +2168,7 @@ const ActionButton = ({ onGenerateGoals, onGenerateFeatures, onShowVoiceModal, i
 const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, onCompleteTask }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const ai = useMemo(() => new GoogleGenAI({ apiKey: process.env.API_KEY as string }), []);
+    const ai = useMemo(() => new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string }), []);
 
     const callGemini = async (prompt: string, schema?: any) => {
         setIsLoading(true);
