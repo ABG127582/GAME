@@ -2168,9 +2168,20 @@ const ActionButton = ({ onGenerateGoals, onGenerateFeatures, onShowVoiceModal, i
 const GeminiWrapper = ({ children, tasks, onNewGoals, onNewFeatures, onAddTask, onCompleteTask }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const ai = useMemo(() => new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string }), []);
+    const ai = useMemo(() => {
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        if (!apiKey) {
+            console.warn("Chave da API do Gemini não encontrada. Funções de IA estarão desabilitadas.");
+            return null;
+        }
+        return new GoogleGenAI({ apiKey: apiKey as string });
+    }, []);
 
     const callGemini = async (prompt: string, schema?: any) => {
+        if (!ai) {
+            setError("A chave da API de IA não está configurada. Por favor, adicione VITE_GEMINI_API_KEY ao seu ambiente.");
+            return null;
+        }
         setIsLoading(true);
         setError(null);
         try {
